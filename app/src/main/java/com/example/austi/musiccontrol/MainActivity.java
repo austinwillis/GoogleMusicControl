@@ -1,5 +1,6 @@
 package com.example.austi.musiccontrol;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -14,7 +15,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
     }
 
@@ -28,8 +28,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_settings:
-                // User chose the "Settings" item, show the app settings UI...
+            case R.id.action_settings: {
+                Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+                //intent.setClassName(this, ".SettingsActivity");
+                startActivity(intent);
+                return true;
+            }
+
+            case R.id.add_server_button:
+                //addServer();
                 return true;
 
             default:
