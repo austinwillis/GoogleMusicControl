@@ -4,8 +4,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <header
-        android:fragment="your.package.MyPreferenceFragment"
-        android:title="Goto: Preference fragment"
+        android:fragment="com.example.austi.musiccontrol.MySettingFragment"
+        android:title="Preferences"
         android:summary="An example of some preferences." />
 
 </preference-headers>
