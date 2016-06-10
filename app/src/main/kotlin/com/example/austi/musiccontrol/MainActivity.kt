@@ -3,10 +3,13 @@ package com.example.austi.musiccontrol
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.design.widget.NavigationView
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.ArrayAdapter
+import android.widget.ListView
 import com.google.android.gms.common.api.GoogleApiClient
 
 class MainActivity : AppCompatActivity() {
@@ -22,13 +25,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val myToolbar = findViewById(R.id.my_toolbar) as Toolbar?
         setSupportActionBar(myToolbar)
-        supportActionBar!!.setHomeButtonEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeButtonEnabled(true)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.servermenu, menu)
         return super.onCreateOptionsMenu(menu)
     }
+
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
