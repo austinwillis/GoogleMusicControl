@@ -3,7 +3,12 @@ package com.example.austi.musiccontrol
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.NavigationView
+import android.support.design.widget.Snackbar
+import android.support.v4.view.GravityCompat
+import android.support.v4.widget.DrawerLayout
+import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
@@ -12,7 +17,7 @@ import android.widget.ArrayAdapter
 import android.widget.ListView
 import com.google.android.gms.common.api.GoogleApiClient
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -23,17 +28,36 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val myToolbar = findViewById(R.id.my_toolbar) as Toolbar?
+        val myToolbar = findViewById(R.id.toolbar) as Toolbar?
         setSupportActionBar(myToolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setHomeButtonEnabled(true)
+
+        val fab = findViewById(R.id.fab) as FloatingActionButton?
+        fab!!.setOnClickListener { view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show() }
+
+        val drawer = findViewById(R.id.drawer_layout) as DrawerLayout?
+        val toggle = ActionBarDrawerToggle(
+                this, drawer, myToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        drawer!!.setDrawerListener(toggle)
+        toggle.syncState()
+
+        val navigationView = findViewById(R.id.nav_view) as NavigationView?
+        navigationView!!.setNavigationItemSelectedListener(this)
+    }
+
+    override fun onBackPressed() {
+        val drawer = findViewById(R.id.drawer_layout) as DrawerLayout?
+        if (drawer!!.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.servermenu, menu)
-        return super.onCreateOptionsMenu(menu)
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menuInflater.inflate(R.menu.drawer, menu)
+        return true
     }
-
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -59,5 +83,29 @@ class MainActivity : AppCompatActivity() {
     fun switchToAddServer(view: View) {
         val intent = Intent(this, AddServerActivity::class.java)
         startActivity(intent)
+    }
+
+    @SuppressWarnings("StatementWithEmptyBody")
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        // Handle navigation view item clicks here.
+        val id = item.itemId
+
+        if (id == R.id.nav_camera) {
+            // Handle the camera action
+        } else if (id == R.id.nav_gallery) {
+
+        } else if (id == R.id.nav_slideshow) {
+
+        } else if (id == R.id.nav_manage) {
+
+        } else if (id == R.id.nav_share) {
+
+        } else if (id == R.id.nav_send) {
+
+        }
+
+        val drawer = findViewById(R.id.drawer_layout) as DrawerLayout?
+        drawer!!.closeDrawer(GravityCompat.START)
+        return true
     }
 }
