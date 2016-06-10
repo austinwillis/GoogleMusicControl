@@ -1,13 +1,25 @@
 package com.example.austi.musiccontrol;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 public class MainActivity extends AppCompatActivity {
+
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             case R.id.add_server_button:
-                //addServer();
+                switchToAddServer(findViewById(getTaskId()));
                 return true;
 
             default:
@@ -45,5 +57,10 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
 
         }
+    }
+
+    public void switchToAddServer(View view) {
+        Intent intent = new Intent(this, AddServerActivity.class);
+        startActivity(intent);
     }
 }
